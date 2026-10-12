@@ -124,7 +124,7 @@ LLM 在 Agent 中通常承担如下几类工作：
 
 
 
-![image-20261010183448316](/Users/zhongjywork/Library/Application Support/typora-user-images/image-20261010183448316.png)
+![ch01-20261010183448316](images/ch01-20261010183448316.png)
 
 
 
@@ -430,7 +430,7 @@ Agent 更像一个辅助就医的数字助理：先理解你描述的情况，�
 
 我们再次用这张图片来简要表示一下循环：
 
-![image-20261011155018557](/Users/zhongjywork/Library/Application Support/typora-user-images/image-20261011155018557.png)
+![ch01-20261011155018557](images/ch01-20261011155018557.png)
 
 
 
