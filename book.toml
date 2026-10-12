@@ -1,0 +1,11 @@
+[book]
+title = "白话 AI Agent"
+authors = ["zhongjy-work"]
+language = "zh-CN"
+src = "src"
+
+[output.html]
+git-repository-url = "https://github.com/zhongjy-work/SimpleAIAgent"
+edit-url-template = "https://github.com/zhongjy-work/SimpleAIAgent/edit/main/{path}"
+site-url = "/SimpleAIAgent/"
+
