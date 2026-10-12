@@ -6,7 +6,7 @@
 
 
 
-📖 [在线阅读](https://zhongj-ywork.github.io/SimpleAIAgent/)
+📖 [在线阅读](https://zhongjy-work.github.io/SimpleAIAgent/)
 📥 [下载 PDF](https://zhongjy-work.github.io/SimpleAIAgent/downloads/book.pdf) ｜ [下载 EPUB](https://zhongjy-work.github.io/SimpleAIAgent/downloads/book.epub)
 
 
