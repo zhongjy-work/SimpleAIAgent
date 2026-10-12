@@ -1,0 +1,75 @@
+name: Build & Deploy Book
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write      # 创建 Release 需要
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 安装 mdBook
+        uses: peaceiris/actions-mdbook@v2
+        with:
+          mdbook-version: "latest"
+
+      - name: 安装 Pandoc、LaTeX 与中文字体
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc texlive-xetex texlive-fonts-recommended \
+            texlive-lang-chinese fonts-noto-cjk
+
+      - name: 生成 EPUB 和 PDF
+        run: |
+          mkdir -p dist
+          # 按 SUMMARY.md 的顺序取出所有章节文件
+          FILES=$(grep -oP '\]\(\K[^)]+\.md' src/SUMMARY.md | grep -v downloads.md | sed 's#^#src/#')
+          pandoc metadata.yaml $FILES -o dist/book.epub \
+            --toc --resource-path=src
+          pandoc metadata.yaml $FILES -o dist/book.pdf \
+            --toc --resource-path=src --pdf-engine=xelatex \
+            -V CJKmainfont="Noto Serif CJK SC" \
+            -V mainfont="Noto Serif CJK SC" \
+            -V geometry:margin=2.5cm
+
+      - name: 构建网站
+        run: |
+          mdbook build
+          mkdir -p book/downloads
+          cp dist/book.pdf dist/book.epub book/downloads/
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: book
+
+      - name: 发布 Release（仅打 tag 时）
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/book.pdf
+            dist/book.epub
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
