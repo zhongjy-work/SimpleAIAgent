@@ -955,7 +955,7 @@ MODEL = os.environ.get("LLM_MODEL", "Gemma4-12B-QAT-Uncensored-HauhauCS-Balanced
 
 ......
 
-{{#include ../code/ch02/ch02-context_compression.py:compression_comparison_experiment}}
+{{#include ../code/ch02/ch02-context_compression_experiment.py:compression_comparison_experiment}}
 ```
 
 > 完整可运行的代码: [code/ch02-context/ch02-context_compression_experiment](https://github.com/zhongjy-work/SimpleAIAgent/tree/main/code/ch02-context/ch02-context_compression_experiment.py)
