@@ -955,7 +955,17 @@ MODEL = os.environ.get("LLM_MODEL", "Gemma4-12B-QAT-Uncensored-HauhauCS-Balanced
 
 ......
 
-{{#include ../code/ch02/ch02-context_compression_experiment.py:compression_comparison_experiment}}
+def main():
+    """入口：依次用三种策略跑同一段对话脚本，最后输出对比报告。"""
+    strategies = [
+        ("完整上下文", FullStrategy()),
+        ("直接截断", TruncateStrategy(TRUNCATE_BUDGET)),
+        ("结构化压缩", StructuredStrategy(COMPRESS_TRIGGER, KEEP_RECENT)),
+    ]
+    results = []
+    for name, strategy in strategies:
+        results.append(run_experiment(name, strategy))
+    print_report(results)
 ```
 
 > 完整可运行的代码: [code/ch02-context/ch02-context_compression_experiment](https://github.com/zhongjy-work/SimpleAIAgent/tree/main/code/ch02-context/ch02-context_compression_experiment.py)

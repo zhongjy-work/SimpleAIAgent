@@ -386,7 +386,6 @@ def print_report(results):
             print(r["memory"])
 
 
-# ANCHOR: compression_comparison_experiment
 def main():
     """入口：依次用三种策略跑同一段对话脚本，最后输出对比报告。"""
     strategies = [
@@ -398,7 +397,6 @@ def main():
     for name, strategy in strategies:
         results.append(run_experiment(name, strategy))
     print_report(results)
-# ANCHOR_END: compression_comparison_experiment
 
 
 if __name__ == "__main__":
