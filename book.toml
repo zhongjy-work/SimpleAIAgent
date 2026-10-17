@@ -5,6 +5,7 @@ language = "zh-CN"
 src = "src"
 
 [output.html]
+mathjax-support = true
 git-repository-url = "https://github.com/zhongjy-work/SimpleAIAgent"
 edit-url-template = "https://github.com/zhongjy-work/SimpleAIAgent/edit/main/{path}"
 site-url = "/SimpleAIAgent/"
